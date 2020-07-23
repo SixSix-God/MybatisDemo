@@ -1,5 +1,6 @@
 package com.mybatis.simple.mapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatis.simple.dao.UserMapper;
 import com.mybatis.simple.model.Country;
 import org.apache.ibatis.io.Resources;
@@ -13,15 +14,10 @@ import util.InitLogRecord;
 import java.io.IOException;
 import java.io.Reader;
 
-/**
- * @ClassName CountryMapperTest
- * @Description
- * @Author ShiZhiQian
- * @Date 2020/6/13 12:54
- **/
 public class CountryMapperTest {
     private static SqlSessionFactory sqlSessionFactory;
-    private UserMapper userMapper;
+    //创建jackson的核心对象 ObjectMapper
+    ObjectMapper mapper = new ObjectMapper();
     @BeforeClass
     public static void init(){
         InitLogRecord.initLog();
@@ -51,11 +47,13 @@ public class CountryMapperTest {
 
     @Test
     public void testSelectName(){
-
+        InitLogRecord.initLog();
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
-            Country selectAll = userMapper.GetOne(1);
-            System.out.println(selectAll.toString());
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            //将实体类转为json格式
+            String json = mapper.writeValueAsString(userMapper.GetOne(1));
+            System.out.println(json);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
