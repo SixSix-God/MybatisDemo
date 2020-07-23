@@ -18,7 +18,7 @@
         FROM country
     </select>
 
-    <select id="GetOne" resultType="string">
+    <select id="GetOne" resultType="Country">
         select
         <include refid="Base_Column"/>
         from country
