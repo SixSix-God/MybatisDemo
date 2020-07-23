@@ -1,12 +1,14 @@
 package com.mybatis.simple.model;
 
+import java.io.Serializable;
+
 /**
  * @ClassName Country
  * @Description
  * @Author ShiZhiQian
  * @Date 2020/6/13 12:10
  **/
-public class Country {
+public class Country implements Serializable {
 
     private Long id;
     private String countryName;

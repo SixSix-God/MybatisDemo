@@ -1,5 +1,6 @@
 package com.mybatis.simple.mapper;
 
+import com.mybatis.simple.dao.UserMapper;
 import com.mybatis.simple.model.Country;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import util.initLogRecord;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -20,8 +23,10 @@ import java.util.List;
  **/
 public class CountryMapperTest {
     private static SqlSessionFactory sqlSessionFactory;
+    private UserMapper userMapper;
     @BeforeClass
     public static void init(){
+        initLogRecord.initLog();
         try {
             Reader resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsReader);
@@ -32,11 +37,11 @@ public class CountryMapperTest {
     }
     @Test
     public void testSelectAll(){
-
+        initLogRecord.initLog();
             SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
-            List<Country> selectAll = sqlSession.selectList("selectAll");
-            System.out.println(selectAll.toString());
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            System.out.println(userMapper.GetAll());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -46,5 +51,18 @@ public class CountryMapperTest {
 
     }
 
+    @Test
+    public void testSelectName(){
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            Country selectAll = userMapper.GetOne(1);
+            System.out.println(selectAll.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlSession.close();
+        }
+    }
 
 }
