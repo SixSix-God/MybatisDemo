@@ -8,12 +8,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import util.initLogRecord;
+import util.InitLogRecord;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
 
 /**
  * @ClassName CountryMapperTest
@@ -26,7 +24,7 @@ public class CountryMapperTest {
     private UserMapper userMapper;
     @BeforeClass
     public static void init(){
-        initLogRecord.initLog();
+        InitLogRecord.initLog();
         try {
             Reader resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsReader);
@@ -37,7 +35,7 @@ public class CountryMapperTest {
     }
     @Test
     public void testSelectAll(){
-        initLogRecord.initLog();
+        InitLogRecord.initLog();
             SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
