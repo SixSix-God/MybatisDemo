@@ -1,17 +1,17 @@
 package com.mybatis.simple.dao;
 
-import com.mybatis.simple.model.Country;
+import com.mybatis.simple.model.CountryModel;
 
 import java.util.List;
 
 public interface UserMapper {
-    List<Country> GetAll();
+    List<CountryModel> GetAll();
 
-    Country GetOne(int id);
+    CountryModel GetOne(CountryModel country);
 
-    void insert(Country user);
+    boolean insert(CountryModel user);
 
-    void update(Country user);
+    boolean update(CountryModel user);
 
-    void delete(int id);
+    boolean delete(int id);
 }

@@ -1,7 +1,7 @@
 package com.mybatis.simple.controller;
 
 import com.mybatis.simple.dao.UserMapper;
-import com.mybatis.simple.model.Country;
+import com.mybatis.simple.model.CountryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,25 +15,26 @@ public class UserEntityControler {
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/getUsers")
-    public List<Country> getUsers() {
-        List<Country> users=userMapper.GetAll();
+    @RequestMapping("/getAll")
+    public List<CountryModel> getUsers() {
+        List<CountryModel> users=userMapper.GetAll();
         return users;
     }
 
-    @RequestMapping("/getUser")
-    public Country getUser(int id) {
-        Country user=userMapper.GetOne(id);
+    @RequestMapping("/getOne")
+    public CountryModel getUser(CountryModel countryModel) {
+
+        CountryModel user=userMapper.GetOne(countryModel);
         return user;
     }
 
     @RequestMapping("/add")
-    public void save(Country user) {
+    public void save(CountryModel user) {
         userMapper.insert(user);
     }
 
     @RequestMapping(value="update")
-    public void update(Country user) {
+    public void update(CountryModel user) {
         userMapper.update(user);
     }
 

@@ -3,22 +3,36 @@ package com.mybatis.simple.model;
 import java.io.Serializable;
 
 /**
- * @ClassName Country
+ * @ClassName CountryModel
  * @Description
  * @Author ShiZhiQian
  * @Date 2020/6/13 12:10
  **/
-public class Country implements Serializable {
+public class CountryModel implements Serializable {
 
-    private Long id;
+    private Integer id;
     private String countryName;
     private String countryCode;
 
-    public Long getId() {
+    public CountryModel(String countryName, String countryCode) {
+        this.countryName = countryName;
+        this.countryCode = countryCode;
+    }
+
+    public CountryModel(Integer id, String countryName, String countryCode) {
+        this.id = id;
+        this.countryName = countryName;
+        this.countryCode = countryCode;
+    }
+
+    public CountryModel() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,7 +54,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "CountryModel{" +
                 "id=" + id +
                 ", countryName='" + countryName + '\'' +
                 ", countryCode='" + countryCode + '\'' +
